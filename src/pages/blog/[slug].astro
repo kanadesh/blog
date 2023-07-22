@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content'
+import Layout from '../../layouts/base.astro'
+
+const post = (await getCollection('blog')).filter(
+    (post) => post.slug === Astro.params.slug
+)[0]
+const { Content } = await post.render()
+
+export const getStaticPaths = async () => {
+    const posts = await getCollection('blog')
+
+    return posts.map((post) => ({
+        params: {
+            slug: post.slug
+        }
+    }))
+}
+---
+
+<Layout>
+    <h1 class='text-3xl font-bold'>{post.data.title}</h1>
+    <p class='mt-2 text-slate-700'>{post.data.title}</p>
+    <div class='mt-4 text-sm text-slate-500'>
+        <p class='inline-block'>
+            {post.data.date.toLocaleDateString('en-US')}
+        </p>
+        |
+        <p class='inline-block'>
+            {
+                {
+                    en: 'English',
+                    ja: 'Japanese'
+                }[post.data.lang]
+            }
+        </p>
+    </div>
+    <div class='blog mt-5 border-t border-slate-300 pt-5'>
+        <Content />
+    </div>
+</Layout>

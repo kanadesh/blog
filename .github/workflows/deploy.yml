@@ -1,0 +1,36 @@
+name: Deploy to Cloudflare Pages
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    publish:
+        runs-on: ubuntu-20.04
+        permissions:
+            contents: read
+            deployments: write
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Use Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '18.x'
+
+            - name: Install dependencies
+              run: yarn
+
+            - name: Build the client
+              run: yarn  build
+
+            - name: Deploy the client
+              uses: cloudflare/pages-action@v1
+              with:
+                  accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+                  apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+                  projectName:
+                  directory: ./dist
+                  wranglerVersion: 3

@@ -1,0 +1,54 @@
+---
+import '../styles/global.css'
+import { SITENAME, DESCRIPTION } from '../../config'
+
+const title = Astro.props.title
+    ? `${Astro.props.title} by ${SITENAME}}`
+    : SITENAME
+const description = Astro.props.description || DESCRIPTION
+---
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel='icon' href='/favicon.webp' />
+        <meta property='og:image' content='/favicon.webp' />
+        <meta charset='utf-8' />
+        <title>{title}</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <meta name='description' content={description} />
+        <meta property='og:title' content={title} />
+        <meta property='og:type' content='blog' />
+        <meta property='og:url' content='https://kanadesh.com' />
+        <meta property='og:description' content={description} />
+    </head>
+    <body class='mx-auto w-full px-5 md:w-2/3 lg:w-1/2'>
+        <header class='my-10'>
+            <a href='/' class='block text-2xl font-bold'>{SITENAME}</a>
+            <div class='mt-5'>
+                {
+                    [
+                        ['Home', '/'],
+                        ['Blog', '/blog']
+                    ].map(([label, href]) => (
+                        <a
+                            href={href}
+                            class='mr-2 inline-block text-blue-500 hover:underline'
+                        >
+                            {label}
+                        </a>
+                    ))
+                }
+            </div>
+        </header>
+        <main>
+            <slot />
+        </main>
+        <footer class='mt-10 text-center text-slate-700'>
+            Made by <a
+                href='/authors/kanadesh'
+                class='text-blue-500 hover:underline'>kanadesh</a
+            >
+        </footer>
+    </body>
+</html>
