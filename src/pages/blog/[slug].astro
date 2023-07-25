@@ -18,9 +18,9 @@ export const getStaticPaths = async () => {
 }
 ---
 
-<Layout>
+<Layout title={post.data.title} description={post.data.description}>
     <h1 class='text-3xl font-bold'>{post.data.title}</h1>
-    <p class='mt-2 text-slate-700'>{post.data.title}</p>
+    <p class='mt-2 text-slate-700'>{post.data.description}</p>
     <div class='mt-4 text-sm text-slate-500'>
         <p class='inline-block'>
             {post.data.date.toLocaleDateString('en-US')}

@@ -1,8 +1,8 @@
 ---
-title: 'The First Post'
-description: 'Hello, guys.'
-date: 'Jul 21 2023'
-lang: 'en'
+title: The First Post
+description: Hello, guys.
+date: Jul 21 2023
+lang: en
 ---
 
 Hello, guys. Welcome to my new blog.
