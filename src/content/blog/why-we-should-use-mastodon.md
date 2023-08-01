@@ -3,6 +3,7 @@ title: Why We Should Use Mastodon
 description: (Instead of Twitter... Oh sorry, It's X.com now lol)
 date: Jul 25 2023
 lang: en
+author: kanadesh
 ---
 
 Recently, There's a news from Elon.

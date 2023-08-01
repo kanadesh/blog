@@ -1,0 +1,36 @@
+---
+import { getCollection, getEntryBySlug } from 'astro:content'
+import Layout from '../../layouts/base.astro'
+import { country, pronoun } from '../../lib/data'
+
+const author = await getEntryBySlug('authors', Astro.params.slug || 'kanadesh')
+const Content = (await author?.render())?.Content
+
+export const getStaticPaths = async () => {
+    const authors = await getCollection('authors')
+
+    return authors.map((author) => ({
+        params: {
+            slug: author.slug
+        }
+    }))
+}
+---
+
+<Layout title={author?.data.name} description={`${author?.data.name}'s bio`}>
+    <div class='text-center'>
+        <img
+            src={`/icons/${author?.slug}.webp`}
+            class='mb-8 inline-block w-24 rounded-full'
+        />
+        <div class='flex items-center justify-center align-middle'>
+            <h1 class='text-2xl font-bold'>
+                {author?.data.name}
+                {country(author?.data.from)}
+            </h1>
+        </div>
+    </div>
+    <div class='blog mt-5 border-t border-stone-300 pt-5 text-center'>
+        {Content ? <Content /> : ''}
+    </div>
+</Layout>

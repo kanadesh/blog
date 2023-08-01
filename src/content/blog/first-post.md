@@ -3,6 +3,7 @@ title: The First Post
 description: Hello, guys.
 date: Jul 21 2023
 lang: en
+author: kanadesh
 ---
 
 Hello, guys. Welcome to my new blog.

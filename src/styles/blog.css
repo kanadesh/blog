@@ -26,7 +26,7 @@
 }
 
 .blog p {
-    @apply mb-4 text-slate-700;
+    @apply mb-4 text-stone-700;
 }
 
 .blog ul,
@@ -36,13 +36,11 @@ ol {
 
 .blog code,
 .blog code * {
-    font-family: Consolas, 'Courier New', Courier, Monaco, monospace,
-        'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans',
-        Meiryo, sans-serif, system-ui;
+    @apply font-mono;
 }
 
 .blog p > code {
-    @apply inline-block rounded-md bg-slate-200 px-2 py-1 text-sm text-slate-700;
+    @apply inline-block rounded-md bg-slate-200 px-2 py-1 text-sm text-stone-700;
 }
 
 .blog pre {
@@ -50,12 +48,29 @@ ol {
 }
 
 .blog pre > code {
-    @apply block rounded-none bg-slate-900 p-5 text-sm font-medium;
+    @apply block rounded-none bg-stone-900 p-5 text-sm font-medium;
 }
 
 .blog blockquote {
-    @apply my-5 block rounded-none bg-slate-200 p-5 italic text-slate-700;
+    @apply my-5 block rounded-none bg-stone-100 p-5 italic text-stone-700;
 }
 .blog blockquote > *:last-child {
     @apply mb-0;
+}
+
+.blog a {
+    @apply text-blue-500 hover:underline;
+}
+
+.share-button {
+    @apply inline-block rounded-full border border-stone-300 bg-stone-100 p-5 hover:border-stone-400;
+}
+.share-button.twitter:hover {
+    @apply border-blue-700 bg-blue-500;
+}
+.share-button.mastodon:hover {
+    @apply border-indigo-700 bg-indigo-500;
+}
+.share-button:hover svg {
+    @apply invert;
 }

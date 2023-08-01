@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/base.astro'
+import { getCollection } from 'astro:content'
+import { country, pronoun } from '../../lib/data'
+
+const authors = (await getCollection('authors')).slice()
+---
+
+<Layout
+    title='Authors'
+    description="Here's all of my blog authors. Please read them."
+>
+    {
+        authors.map((author) => (
+            <div class='mt-5 flex items-center border-b border-stone-300 pb-5 align-middle'>
+                <div>
+                    <img
+                        src={`/icons/${author?.slug}.webp`}
+                        class='mr-5 inline-block w-14 rounded-full'
+                    />
+                </div>
+                <div>
+                    <h2 class='text-xl font-bold'>
+                        {author.data.name}
+                        {country(author.data.from)}
+                    </h2>
+                    <a
+                        class='mt-1 block text-blue-500 hover:underline'
+                        href={`/authors/${author.slug}`}
+                    >
+                        More about{' '}
+                        {(pronoun(author.data.pronoun) || '/').split('/')[1]}
+                    </a>
+                </div>
+            </div>
+        ))
+    }
+</Layout>
