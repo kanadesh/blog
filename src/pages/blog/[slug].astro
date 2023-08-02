@@ -5,7 +5,7 @@ import { lang } from '../../lib/data'
 import { HOSTNAME } from '../../../config'
 
 const post = await getEntryBySlug('blog', Astro.params.slug || 'first-post')
-const author = await getEntryBySlug('authors', post.data.author)
+const author = await getEntryBySlug('authors', post?.data.author || 'kanadesh')
 const Content = (await post?.render())?.Content
 
 export const getStaticPaths = async () => {
@@ -31,9 +31,9 @@ export const getStaticPaths = async () => {
             {lang(post?.data.lang)}
         </p>
         <p class='mx-1'>･</p>
-        <a class='block' href={`/authors/${post.data.author}`}>
+        <a class='block' href={`/authors/${post?.data.author}`}>
             <img
-                src={`/icons/${post.data.author}.webp`}
+                src={`/icons/${post?.data.author}.webp`}
                 class='w-8 rounded-full'
             /></a
         >
@@ -47,7 +47,7 @@ export const getStaticPaths = async () => {
             href={`http://twitter.com/share?url=${encodeURIComponent(
                 `https://${HOSTNAME}/blog/${Astro.params.slug}`
             )}&text=${encodeURIComponent(
-                `"${post.data.title}" by ${author?.data.name}\n\n`
+                `"${post?.data.title}" by ${author?.data.name}\n\n`
             )}&hashtags=${encodeURIComponent(
                 ['blog', 'kanadesh', 'rt'].join(',')
             )}`}
@@ -76,7 +76,7 @@ export const getStaticPaths = async () => {
             href={`http://mastodonshare.com/share?url=${encodeURIComponent(
                 `https://${HOSTNAME}/blog/${Astro.params.slug}`
             )}&text=${encodeURIComponent(
-                `"${post.data.title}" by ${author?.data.name}\n\n`
+                `"${post?.data.title}" by ${author?.data.name}\n\n`
             )}`}
             class='share-button mastodon'
         >
